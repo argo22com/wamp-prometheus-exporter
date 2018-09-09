@@ -9,7 +9,7 @@ from twisted.internet.defer import inlineCallbacks
 from twisted.web.resource import Resource
 from twisted.web.server import Site
 
-g_active_sessions = Gauge('active_sessions', 'Number of sessions currently active', ['router_url', 'realm'])
+g_active_sessions = Gauge('active_session_count', 'Number of sessions currently active', ['router_url', 'realm'])
 
 g_registration_callees = Gauge('active_callee_count', 'Number of sessions currently attached to the registration',
                                ['router_url', 'realm', 'uri'])
@@ -24,6 +24,7 @@ settings = {
     "wamp_principal": os.environ.get('WAMP_PRINCIPAL'),
     "wamp_ticket": os.environ.get('WAMP_TICKET'),
 }
+
 component = Component(
     transports=settings.get('wamp_url'),
     realm=settings.get('wamp_realm'),
